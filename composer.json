@@ -1,0 +1,23 @@
+{
+    "name": "litenight/litenight",
+    "description": "A drop-in admin panel for PHP projects.",
+    "type": "project",
+    "require": {
+        "php": ">=7.0",
+        "nikic/fast-route": "^2.0@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saranga Abeykoon",
+            "email": "amisaranga@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Litenight\\": "lib/"
+        }
+    }
+}

@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to LiteNight"/>
-  </div>
+  <v-app id="litenight">
+    <v-navigation-drawer v-model="drawer" app >
+    </v-navigation-drawer>
+
+    <v-app-bar app color="deep-orange darken-4" dark>
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+      </v-app-bar-nav-icon>
+    </v-app-bar>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+  },
+  data: () => ({
+    drawer: null,
+  }),
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

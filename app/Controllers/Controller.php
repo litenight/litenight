@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Litenight\Application;
 use Litenight\Views\Template;
 
 /**
@@ -9,10 +10,13 @@ use Litenight\Views\Template;
  */
 class Controller
 {
+    protected $application;
+
     protected $template;
 
-    function __construct(Template $template = null)
+    function __construct(Application $application, Template $template = null)
     {
+        $this->application = $application ?? new Application();
         $this->template = $template ?? new Template();
     }
 

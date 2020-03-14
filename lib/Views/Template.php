@@ -7,13 +7,15 @@ namespace Litenight\Views;
  */
 class Template
 {
-    private $_baseViewPath = BASE_VIEW_PATH;
-    private $_extension = DEFAULT_VIEW_EXTENSION;
+    private $_baseViewPath;
+    private $_extension;
 
     public $properties;
 
-    public function __construct()
+    public function __construct($basePath = '../views', $defaultExtension = 'php')
     {
+        $this->_baseViewPath = $basePath;
+        $this->_extension = $defaultExtension;
         $this->properties = [];
     }
 
@@ -26,7 +28,7 @@ class Template
     {
         $path = $this->_baseViewPath . $view . '.' . $this->_extension;
         $this->properties = array_merge($this->properties, $data);
-        
+
         ob_start();
         if (file_exists($path)) {
             include($path);

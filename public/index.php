@@ -4,9 +4,7 @@ require '../vendor/autoload.php';
 require_once '../config/settings.php';
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', function() {
-        echo json_encode(['date' => date('Y-m-d')]);
-    });
+    $r->addRoute('GET', '/', ['\App\Controllers\SiteController', 'index']);
     $r->addRoute('GET', '/users', 'get_all_users_handler');
     // {id} must be a number (\d+)
     $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
@@ -36,6 +34,7 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        $handler();
+        $controller = new $handler[0]();
+        $controller->{$handler[1]}();
         break;
 }

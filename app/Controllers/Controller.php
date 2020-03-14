@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use Litenight\Views\Template;
+
 /**
  *
  */
 class Controller
 {
+    protected $template;
 
-    function __construct()
+    function __construct(Template $template = null)
     {
-        // code...
+        $this->template = $template ?? new Template();
     }
 
     /**
@@ -19,15 +22,16 @@ class Controller
      */
     public function renderJson($data = [])
     {
-        echo json_encode($value);
+        echo json_encode($data);
     }
 
     /**
      * Renders the given data to JSON format and output
+     * @param string $view Relative path of the view file
      * @param array $data Array of data to render
      */
-    public function renderView($view, $data = [])
+    public function renderView($view, $data)
     {
-        echo json_encode($value);
+        echo $this->template->render($view, $data);
     }
 }

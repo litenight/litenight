@@ -3,18 +3,14 @@
 namespace App\Controllers;
 
 /**
- *
+ * SiteController class
  */
-class Controller extends Controller
+class SiteController extends Controller
 {
-
-    function __construct()
-    {
-        // code...
-    }
-
     public function index()
     {
-        
+        $this->renderView('/site/index', [
+            'title' => 'This is Litenight!'
+        ]);
     }
 }

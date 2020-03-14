@@ -1,21 +1,55 @@
 <?php
 
-namespace Litenite\Views;
+namespace Litenight\Views;
 
 /**
  * Template class
  */
 class Template
 {
-    private $_viewPath = VIEWS_PATH;
+    private $_baseViewPath = BASE_VIEW_PATH;
+    private $_extension = DEFAULT_VIEW_EXTENSION;
 
-    function __construct(argument)
+    public $properties;
+
+    public function __construct()
     {
-        // code...
+        $this->properties = [];
     }
 
+    /**
+     * Renders a view file with a set of data
+     * @param string $view Relative path of the view file to be rendered. Must start with a leadng /. Eg: `'/product/details'`
+     * @param array $data Set of data to render in view
+     */
     public function render($view, $data = [])
     {
-        // code...
+        $path = $this->_baseViewPath . $view . '.' . $this->_extension;
+        $this->properties = array_merge($this->properties, $data);
+        
+        ob_start();
+        if (file_exists($path)) {
+            include($path);
+        } else throw new TemplateNotFoundException();
+        return ob_get_clean();
+    }
+
+    /**
+     * Magic method for setting properties
+     * @param string $key The property key
+     * @param mixed $value The value of the property
+     */
+    public function __set($key, $value)
+    {
+        $this->properties[$key] = $value;
+    }
+
+    /**
+     * Magic method for getting properties
+     * @param string $key The property key
+     */
+    public function __get($key)
+    {
+        return $this->properties[$key];
     }
 }
